@@ -1,14 +1,21 @@
 {
   "name": "remark-img-signed-s3",
   "version": "0.1.0",
+  "type": "module",
   "description": "remark plugin to parse image object keys to signed aws s3 urls",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nestef/remark-img-signed-s3.git"
+  },
+  "author": "Noah Steffes",
   "license": "MIT",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.14.0",
+    "@aws-sdk/s3-request-presigner": "^3.14.0",
     "unist-util-visit": "3.0.1"
   }
 }
