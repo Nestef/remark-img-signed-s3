@@ -1,6 +1,6 @@
 {
   "name": "remark-img-signed-s3",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "type": "module",
   "description": "remark plugin to parse image object keys to signed aws s3 urls",
   "main": "index.js",
