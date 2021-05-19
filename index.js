@@ -7,12 +7,13 @@ function getSignedUrls(options) {
     const s3Client = options.s3
     const bucket = options.bucket
     const expiration = options.expiration
-    const tail = function (res) {
-      return res
+    const cacheAdd = function (item) {
+      return item
     }
-    if (options.tail) {
-      tail = options.tail
+    if (options.cacheAdd) {
+      cacheAdd = options.cacheAdd
     }
+    const cacheRead = options.cacheRead
 
     return transformer
 
@@ -28,14 +29,18 @@ function getSignedUrls(options) {
             if (isValidHttpUrl(node.url)) {
                 return
             }
-
+            let p = null
+            if (cacheRead) {
+              p = cacheRead()
+            } else {
             // get aws
             var params = { Bucket: bucket, Key: node.url}
             var command = new GetObjectCommand(params)
 
             // make requests
             // edit link text
-            const p = getSignedUrl(s3Client, command, { expiresIn: expiration }).then(tail).then(res => node.url = res)
+            p = getSignedUrl(s3Client, command, { expiresIn: expiration }).then(cacheAdd).then(res => node.url = res)
+            }
             promises.push(p)
             
         }
