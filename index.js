@@ -7,7 +7,12 @@ function getSignedUrls(options) {
     const s3Client = options.s3
     const bucket = options.bucket
     const expiration = options.expiration
-    const tail = options.tail
+    const tail = function (res) {
+      return res
+    }
+    if (options.tail) {
+      tail = options.tail
+    }
 
     return transformer
 
