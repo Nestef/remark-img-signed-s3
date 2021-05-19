@@ -7,6 +7,7 @@ function getSignedUrls(options) {
     const s3Client = options.s3
     const bucket = options.bucket
     const expiration = options.expiration
+    const tail = options.tail
 
     return transformer
 
@@ -29,7 +30,7 @@ function getSignedUrls(options) {
 
             // make requests
             // edit link text
-            const p = getSignedUrl(s3Client, command, { expiresIn: expiration }).then(res => node.url = res)
+            const p = getSignedUrl(s3Client, command, { expiresIn: expiration }).then(tail).then(res => node.url = res)
             promises.push(p)
             
         }
