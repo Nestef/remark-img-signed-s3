@@ -7,7 +7,7 @@ function getSignedUrls(options) {
     const s3Client = options.s3
     const bucket = options.bucket
     const expiration = options.expiration
-    const cacheAdd = function (item) {
+    let cacheAdd = function (item) {
       return item
     }
     if (options.cacheAdd) {
