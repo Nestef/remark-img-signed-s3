@@ -10,8 +10,7 @@ function getSignedUrls (options) {
   let cacheAdd = function (item) {
     return item
   }
-  let cacheRead = function ()
-    if (options.cacheAdd) {
+  if (options.cacheAdd) {
     cacheAdd = options.cacheAdd
   }
   const cacheRead = options.cacheRead
