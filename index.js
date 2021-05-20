@@ -30,14 +30,14 @@ function getSignedUrls (options) {
         return
       }
       if (cacheRead) {
-        cacheRead().then(res => {
+        cacheRead(node.url).then(res => {
           if (res === null) {
             const params = { Bucket: bucket, Key: node.url }
             const command = new GetObjectCommand(params)
 
             // make requests
             // edit link text
-            const p = getSignedUrl(s3Client, command, { expiresIn: expiration }).then(cacheAdd).then(res => { node.url = res })
+            const p = getSignedUrl(s3Client, command, { expiresIn: expiration }).then(res => cacheAdd(res, node.url)).then(res => { node.url = res })
             promises.push(p)
           } else {
             promises.push(Promise.resolve(res))
